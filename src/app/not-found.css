@@ -1,0 +1,62 @@
+/* 404 (app/not-found.tsx). The face is the logo face from the homepage closing, looking for the page. */
+.nf { padding-block:88px 120px; align-items:start; }
+.nf-head { grid-column:span 5; position:sticky; top:136px; }
+.nf-places { grid-column:7 / span 6; padding-top:8px; }
+
+.nf-face { display:block; width:150px; height:auto; overflow:visible; margin-bottom:36px; }
+.nf-eye { fill:var(--ink); }
+.nf-eye-b { fill:var(--accent); }
+.nf-pupils { fill:var(--paper); transform:translate(calc(var(--look-x,0) * 1px),calc(var(--look-y,0) * 1px)); }
+.nf-mouth { fill:none; stroke:var(--gold); stroke-width:11; stroke-linecap:round; }
+.nf-face[data-follow=false] .nf-pupils { animation:nf-search 6.4s cubic-bezier(.65,0,.35,1) 1.2s infinite; }
+.nf-face .nf-eyes { transform-box:fill-box; transform-origin:center; animation:nf-blink 5.2s 2.4s infinite; }
+@keyframes nf-search {
+ 0%,12% { transform:translate(0,0); }
+ 18%,34% { transform:translate(-6px,1px); }
+ 40%,56% { transform:translate(6px,-2px); }
+ 62%,78% { transform:translate(2px,5px); }
+ 84%,100% { transform:translate(0,0); }
+}
+@keyframes nf-blink { 0%,94%,100% { transform:scaleY(1); } 97% { transform:scaleY(.1); } }
+
+.nf-code { color:var(--ink-45); }
+.nf-title { margin-top:12px; font-size:clamp(34px,4.2vw,52px); line-height:1.08; letter-spacing:-.02em; text-wrap:balance; }
+.nf-lead { margin-top:20px; font-size:18px; color:var(--ink-70); }
+
+.nf-places ol { margin:0; padding:0; list-style:none; border-top:1px solid var(--rule); }
+.nf-places li { border-bottom:1px solid var(--rule); }
+.nf-places a { position:relative; display:grid; grid-template-columns:44px minmax(0,1fr) auto; grid-template-areas:"num label arrow" "num line arrow"; column-gap:16px; padding:22px 8px 22px 0; text-decoration:none; color:var(--ink); }
+.nf-num { grid-area:num; padding-top:6px; color:var(--ink-45); font:400 12px/1.5 var(--font-plex),monospace; letter-spacing:.08em; }
+.nf-label { grid-area:label; font-size:24px; line-height:1.25; font-weight:500; transition:transform 350ms cubic-bezier(.22,1,.36,1),color 200ms; }
+.nf-line { grid-area:line; margin-top:2px; color:var(--ink-70); font-size:15px; line-height:1.5; transition:transform 350ms cubic-bezier(.22,1,.36,1) 30ms; }
+.nf-arrow { grid-area:arrow; align-self:center; font-size:18px; color:var(--ink-45); transition:transform 350ms cubic-bezier(.22,1,.36,1),color 200ms; }
+.nf-places a::before { content:""; position:absolute; left:0; top:-1px; height:1px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform 450ms cubic-bezier(.22,1,.36,1); }
+.nf-places a:hover .nf-label,.nf-places a:focus-visible .nf-label { transform:translateX(6px); color:var(--accent); }
+.nf-places a:hover .nf-line,.nf-places a:focus-visible .nf-line { transform:translateX(6px); }
+.nf-places a:hover .nf-arrow,.nf-places a:focus-visible .nf-arrow { transform:translate(3px,-3px); color:var(--accent); }
+.nf-places a:hover::before,.nf-places a:focus-visible::before { transform:scaleX(1); }
+.nf-places a:active .nf-label { transform:translateX(6px) scale(.98); }
+
+/* Entrance: the face, then the words, then the places one after another. */
+@media (prefers-reduced-motion:no-preference) {
+ .nf-face,.nf-code,.nf-title,.nf-lead { animation:nf-rise 700ms cubic-bezier(.22,1,.36,1) both; }
+ .nf-code { animation-delay:80ms; }.nf-title { animation-delay:140ms; }.nf-lead { animation-delay:220ms; }
+ .nf-places li { animation:nf-rise 600ms cubic-bezier(.22,1,.36,1) both; animation-delay:calc(260ms + var(--k) * 60ms); }
+ .nf-face { animation-name:nf-rise; }
+}
+@keyframes nf-rise { from { opacity:0; transform:translateY(16px); } }
+
+@media (max-width:1023px) {
+ .nf-head { grid-column:span 12; position:static; }
+ .nf-places { grid-column:span 12; padding-top:24px; }
+}
+@media (max-width:767px) {
+ .nf { padding-block:48px 72px; }
+ .nf-face { width:112px; margin-bottom:28px; }
+ .nf-places a { grid-template-columns:36px minmax(0,1fr) auto; padding-block:18px; }
+ .nf-label { font-size:20px; }
+}
+@media (prefers-reduced-motion:reduce) {
+ .nf-face .nf-eyes,.nf-face .nf-pupils { animation:none!important; transform:none; }
+ .nf-label,.nf-line,.nf-arrow,.nf-places a::before { transition:none; }
+}

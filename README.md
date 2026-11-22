@@ -1,0 +1,109 @@
+# BesideYou — run and test
+
+This is the complete working website snapshot from 9 November 2026 (Asia/Calcutta), including uncommitted homepage and Pilot work. Read HANDOFF.md for context and remaining work. Extract the ZIP before running commands; do not run from inside an archive viewer.
+
+## Prerequisites
+
+- Windows, macOS, or Linux with a terminal and a modern browser.
+- Node.js 22 LTS recommended; Next.js requires Node >=20.9.0. This machine used Node 22.16.0 and npm 10.9.2.
+- npm (included with Node) and internet access to install dependencies from the npm registry.
+- Access to fonts.googleapis.com and fonts.gstatic.com during development/build: next/font downloads Instrument Sans and IBM Plex Mono, then serves them locally. A first offline build will fail.
+- No database, Docker, Python, API key, or .env file is required to run the website. Python and Chrome are only needed for some legacy QA tools.
+
+Check your installation:
+
+```sh
+node --version
+npm --version
+```
+
+## Start for local development
+
+Open a terminal in the extracted besideyou folder (the folder containing package.json):
+
+```sh
+npm ci
+npm run dev
+```
+
+Open http://localhost:3000. Keep the terminal running. Stop with Ctrl+C. The Next.js development indicator is normal. If PowerShell blocks npm.ps1, use npm.cmd instead of npm.
+
+For another port, this direct command avoids npm argument forwarding differences:
+
+```sh
+node node_modules/next/dist/bin/next dev --port 3002
+```
+
+## Build and run production locally
+
+Stop the development server first. From the same folder:
+
+```sh
+npm run build
+npm run start
+```
+
+Open http://localhost:3000. A successful build must precede start. To run production on port 3001 instead:
+
+```sh
+node node_modules/next/dist/bin/next start --port 3001
+```
+
+This is a Next.js server application with an API route. It cannot be run by double-clicking an HTML file or deployed as a static folder alone. For hosting, use a Next.js-compatible Node runtime or platform. Deployment is a separate next step.
+
+## Test the extracted project
+
+1. Run npm ci, then npm run build. This checks production compilation and framework TypeScript checks.
+2. Run the standalone type check:
+
+```sh
+node node_modules/typescript/bin/tsc --noEmit
+```
+
+3. Start either development or production on port 3000. In a second terminal, run:
+
+```sh
+node scripts/smoke-test.mjs
+```
+
+This checks 13 page routes for HTTP 200 and one H1, /pilot redirecting to /the-pilot, and robots/sitemap responses. It sends no booking requests. For a different server address, set QA_URL first:
+
+PowerShell:
+```powershell
+$env:QA_URL = 'http://localhost:3001'
+node scripts/smoke-test.mjs
+```
+
+macOS/Linux:
+```sh
+QA_URL=http://localhost:3001 node scripts/smoke-test.mjs
+```
+
+4. In a browser, inspect /, /the-pilot, /how-it-works, /who-we-work-with, /contact, /privacy, /terms, and the six /outbound routes listed below. Check desktop and mobile widths (375, 768, 1440px), navigation/menu, footer links, keyboard focus, FAQ disclosures, scrolling/animations, and no horizontal overflow. Check /pilot redirects. Use the browser console to catch client errors.
+5. Enable reduced motion in OS/browser settings and check that content remains readable. Disable JavaScript to inspect content and native disclosures. The latest animated Pilot needs dedicated visual review; a passing HTTP smoke check does not verify animation or accessibility.
+6. On /contact, submit an EMPTY form to inspect validation only. Do not submit a completed form casually: it sends to the live booking webhook. Test successful/failing submission with a mocked network route or explicitly coordinated live test.
+
+Outbound slugs: ai-consulting-firms, saas-development-companies, data-engineering-firms, dev-consultancies, bengaluru, mumbai.
+
+## Booking and external services
+
+src/app/api/book-session/route.ts forwards JSON to https://workflow.besideyou.io/webhook/receive-call-details. This endpoint is hardcoded, not an environment variable. The form sends name, company, role, email, primary_growth_objective, current_outbound_state. The ZIP contains no credentials or private environment files. The site can render without webhook access; completed booking submissions require server-side access to that service. Do not change the endpoint or business contract without owner approval.
+
+## Legacy QA and historical evidence
+
+scripts/ contains older Puppeteer/Lighthouse/copy-audit tools. They are preserved for reference, not advertised as portable current acceptance tests. Several hardcode D:/besideyou/qa-tools/node_modules, a Windows Chrome path, port 3001, and old DOM/copy expectations. They require separate QA dependencies (puppeteer-core, lighthouse, chrome-launcher), a Chrome installation, output folders, and path updates before reuse. Some support QA_MODULES, CHROME_PATH, QA_URL; others require code edits. Python copy checks require reports generated by those browser tools. Do not infer a current pass from historical reports.
+
+historical-reports/ contains selected written reports only. Original screenshots, JSON evidence, logs and complete report folders remain on the source machine and are intentionally excluded from this runtime package.
+
+## Troubleshooting
+
+- Port occupied: stop the other process or use the direct --port command above.
+- Font fetch/build error: allow both Google Fonts domains through proxy/firewall, check internet, rerun build. No insecure TLS bypass is needed. Local font bundling would be a separate implementation change.
+- Missing next / React: confirm you are in the correct directory and npm ci completed.
+- start says no production build: run npm run build successfully first.
+- If moving between machines, always run npm ci again; node_modules and .next are intentionally not shipped.
+- Network-device preview may require adjusting allowedDevOrigins in next.config.ts (currently a previous local IP), binding/OS firewall settings. localhost needs no such change.
+
+## Package contents
+
+src/, public/, scripts/, package.json, package-lock.json, TypeScript/Next/PostCSS configuration, generated TypeScript declaration, .gitignore, AGENTS.md, CLAUDE.md, this README.md, HANDOFF.md, historical written reports, and a file hash manifest. Dependencies, .git history, build caches, secrets, environment files, changes.patch, and unrelated research/3D/QA workspaces are excluded. Current source is authoritative; do not apply an old patch over it.

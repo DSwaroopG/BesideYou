@@ -1,0 +1,161 @@
+/* /why-besideyou (the flight scene and its sections). Scoped under .of- because page-level CSS stays loaded after client
+   navigation. Tokens come from :root in globals.css. Gold is a fill only. */
+
+/* ---------- Flight scene ---------- */
+.of-flight { --header-h:88px; position:relative; margin-bottom:120px; }
+
+/* Static mode (server HTML, no JS, reduced motion): poster, then every caption */
+.of-visual { position:relative; overflow:hidden; aspect-ratio:16 / 9; background:var(--paper); border:1px solid var(--rule); }
+.of-poster { display:block; width:100%; height:100%; object-fit:cover; }
+.of-canvas,.of-veil,.of-hint { display:none; }
+.of-label { position:absolute; top:16px; right:18px; font:400 11px/1.6 var(--font-plex),monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-45); }
+.of-beats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px 24px; margin:40px 0 0; padding:0; list-style:none; }
+.of-beat-title { font-size:clamp(24px,2.4vw,32px); line-height:1.15; letter-spacing:-.01em; font-weight:500; color:var(--ink); }
+.of-beat-line { margin-top:10px; font-size:17px; line-height:1.55; color:var(--ink-70); max-width:520px; }
+
+/* Pinned mode: full-bleed sticky stage, canvas over poster, captions crossfade bottom left */
+.of-flight[data-mode=pinned] { width:var(--of-vw,100%); margin-left:calc((100% - var(--of-vw,100%)) / 2); }
+.of-flight[data-mode=pinned] .of-track { height:calc((100svh - var(--header-h)) * 5); }
+.of-flight[data-mode=pinned] .of-stage { position:sticky; top:var(--header-h); height:calc(100svh - var(--header-h)); overflow:hidden; }
+.of-flight[data-mode=pinned] .of-visual { position:absolute; inset:0; aspect-ratio:auto; border:0; }
+.of-flight[data-mode=pinned] .of-canvas { display:block; position:absolute; inset:0; width:100%; height:100%; opacity:0; transition:opacity .9s cubic-bezier(.22,1,.36,1); }
+.of-flight[data-scene=ready] .of-canvas { opacity:1; }
+/* Legibility veil only behind the captions (bottom left), so the scene stays clear elsewhere */
+.of-flight[data-mode=pinned] .of-veil { display:block; position:absolute; inset:0; background:radial-gradient(75% 60% at 0% 100%,rgba(244,242,237,.95) 0%,rgba(244,242,237,.78) 38%,rgba(244,242,237,0) 72%); pointer-events:none; }
+.of-flight[data-mode=pinned] .of-label { top:20px; right:24px; }
+.of-flight[data-mode=pinned] .of-captions { position:absolute; left:0; right:0; bottom:clamp(28px,6vh,64px); width:min(1240px,calc(100% - 48px)); margin-inline:auto; display:flex; justify-content:space-between; align-items:flex-end; gap:24px; }
+/* Captions stay in the bottom-left zone the veil keeps clear, so they never run across the planes, and a soft
+   paper glow sits right behind them so runway markings never show through the words. */
+.of-flight[data-mode=pinned] .of-beats { position:relative; isolation:isolate; display:grid; grid-template-columns:none; margin:0; max-width:min(520px,38%); }
+.of-flight[data-mode=pinned] .of-beats::before { content:""; position:absolute; z-index:-1; inset:-56px -120px -48px -72px; background:radial-gradient(closest-side,rgba(244,242,237,.96) 0%,rgba(244,242,237,.9) 60%,rgba(244,242,237,0) 100%); pointer-events:none; }
+.of-flight[data-mode=pinned] .of-beat { grid-area:1 / 1; transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
+.of-flight[data-mode=pinned] .of-beat[data-state=after] { opacity:0; transform:translateY(18px); }
+.of-flight[data-mode=pinned] .of-beat[data-state=before] { opacity:0; transform:translateY(-18px); }
+.of-flight[data-mode=pinned] .of-beat-title { font-size:clamp(30px,min(4vw,6.2vh),56px); line-height:1.06; letter-spacing:-.025em; text-wrap:balance; }
+.of-flight[data-mode=pinned] .of-beat-line { margin-top:12px; font-size:clamp(16px,min(1.5vw,2.4vh),21px); color:var(--ink); text-wrap:pretty; }
+.of-flight[data-mode=pinned] .of-hint { display:flex; align-items:center; gap:12px; flex:0 0 auto; padding-bottom:8px; font:400 11px/1.6 var(--font-plex),monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-45); opacity:clamp(0, calc(1 - var(--of-p,0) * 25), 1); transition:opacity .3s; }
+.of-hint i { display:block; width:40px; height:1px; background:var(--ink-30); }
+
+/* ---------- The five pillars (philosophy, approach, execution, accountability, vision) ---------- */
+.of-pillars { margin:56px 0 0; padding:0; list-style:none; counter-reset:none; }
+.of-pillar { position:relative; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:24px; padding:32px 0 44px; }
+.of-pillar::before { content:""; position:absolute; left:0; right:0; top:0; height:1px; background:var(--rule); transform-origin:left; }
+.of-pillar:last-child { padding-bottom:0; }
+.of-pillar-side { grid-column:span 4; }
+.of-pillar-label { display:flex; align-items:baseline; gap:10px; padding-top:8px; font:400 12px/1.6 var(--font-plex),monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-45); }
+.of-pillar-label > span { color:var(--accent); }
+.of-pillar-body { grid-column:span 8; }
+.of-pillar h3 { font-size:clamp(24px,2.6vw,34px); line-height:1.15; letter-spacing:-.015em; text-wrap:balance; }
+.of-pillar-body > p { margin-top:14px; max-width:640px; font-size:17px; line-height:1.6; }
+.of-pillar-body > .by-text-link { margin-top:18px; }
+.of-horizons { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:26px; }
+.of-horizon { padding:20px 22px 22px; background:var(--card); border:1px solid var(--rule); }
+.of-horizon-next { background:transparent; border-style:dashed; }
+.of-horizon .of-horizon-label { display:flex; margin:0; align-items:center; gap:10px; font:400 11px/1.6 var(--font-plex),monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-45); }
+.of-horizon-label::before { content:""; flex:0 0 8px; width:8px; height:8px; background:var(--gold); }
+.of-horizon-next .of-horizon-label::before { background:transparent; border:1px solid var(--ink-30); }
+.of-horizon h4 { margin-top:10px; font-size:20px; line-height:1.3; font-weight:500; color:var(--ink); }
+.of-horizon p { margin-top:8px; font-size:16px; line-height:1.55; }
+.of-horizon-next h4,.of-horizon-next p { color:var(--ink-70); }
+/* Reveal: the rule draws, then the label and the words rise; the two horizons follow */
+.of-pillar[data-reveal=armed]::before { transform:scaleX(0); }
+.of-pillar[data-reveal=armed] > *,.of-pillar[data-reveal=armed] .of-horizon { opacity:0; transform:translateY(14px); }
+.of-pillar[data-reveal=in]::before { transition:transform .9s cubic-bezier(.65,0,.35,1) var(--rv); }
+.of-pillar[data-reveal=in] > .of-pillar-side { transition:opacity .6s ease calc(var(--rv) + .15s),transform .8s cubic-bezier(.22,1,.36,1) calc(var(--rv) + .15s); }
+.of-pillar[data-reveal=in] > .of-pillar-body { transition:opacity .6s ease calc(var(--rv) + .3s),transform .8s cubic-bezier(.22,1,.36,1) calc(var(--rv) + .3s); }
+.of-pillar[data-reveal=in] .of-horizon { transition:opacity .6s ease calc(var(--rv) + .55s),transform .8s cubic-bezier(.22,1,.36,1) calc(var(--rv) + .55s); }
+.of-pillar[data-reveal=in] .of-horizon-next { transition-delay:calc(var(--rv) + .8s); }
+
+/* ---------- Closing ---------- */
+.of-close { align-items:end; }
+.of-close h2 { font-size:clamp(34px,5vw,58px); line-height:1.08; letter-spacing:-.02em; }
+.of-close .of-close-line { margin-top:16px; font-size:20px; color:var(--ink); }
+.of-close .by-action { justify-self:end; }
+
+/* ---------- Scroll-in reveals (ScrollReveal) ---------- */
+.of-rv { --rv:var(--d,0ms); }
+.of-rise[data-reveal=armed] { opacity:0; transform:translateY(20px); }
+.of-rise[data-reveal=in] { transition:opacity .7s cubic-bezier(.22,1,.36,1) var(--rv),transform .9s cubic-bezier(.22,1,.36,1) var(--rv); }
+@media print { .of-rv,.of-rv *,.of-rv::before { opacity:1!important; transform:none!important; } }
+
+/* ---------- Small screens ---------- */
+@media (max-width:767px) {
+ .of-flight { --header-h:76px; margin-bottom:72px; }
+ .of-beats { grid-template-columns:minmax(0,1fr); gap:24px; margin-top:28px; }
+ .of-flight[data-mode=pinned] .of-captions { bottom:24px; width:calc(100% - 40px); }
+ .of-flight[data-mode=pinned] .of-veil { background:linear-gradient(to top,rgba(244,242,237,.95) 0%,rgba(244,242,237,.8) 30%,rgba(244,242,237,0) 52%); }
+ .of-flight[data-mode=pinned] .of-hint { display:none; }
+ .of-flight[data-mode=pinned] .of-beats { max-width:100%; }
+ .of-flight[data-mode=pinned] .of-beats::before { inset:-40px -24px -24px -24px; }
+ .of-flight[data-mode=pinned] .of-beat-title { font-size:clamp(28px,8vw,38px); }
+ .of-flight[data-mode=pinned] .of-label { top:14px; right:20px; }
+ .of-pillars { margin-top:36px; }
+ .of-pillar { grid-template-columns:minmax(0,1fr); gap:10px; padding:24px 0 32px; }
+ .of-pillar-side,.of-pillar-body { grid-column:1; }
+ .of-pillar-label { padding-top:0; }
+ .of-horizons { grid-template-columns:minmax(0,1fr); }
+ .of-close .by-action { justify-self:start; }
+}
+@media (prefers-reduced-motion:reduce) {
+ .of-flight *,.of-rv,.of-rv *,.of-rv::before { transition:none!important; }
+}
+
+/* ---------- Pillar drawings (components/pillar-art.tsx). Finished frame by default; loops with motion. ---------- */
+.pa { display:block; width:min(220px,100%); height:auto; margin-top:28px; overflow:visible; fill:none; stroke:var(--ink); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.pa * { vector-effect:non-scaling-stroke; }
+/* philosophy: the glass finds the right buyer, then the talking starts */
+.pa-dot { fill:var(--rule); stroke:none; }
+.pa-target { fill:var(--gold); }
+.pa-glass { transform:translateX(104px); }
+.pa-glass circle { fill:rgba(244,242,237,.55); }
+.pa-bubble path:first-child { fill:var(--card); }
+.pa-bubble-lines { stroke:var(--accent); }
+/* approach: one loop, one runner */
+.pa-track { stroke:var(--ink-30); stroke-dasharray:3 5; }
+.pa-node { fill:var(--card); stroke:var(--accent); }
+.pa-runner { fill:var(--gold); stroke:none; offset-distance:30%; }
+/* execution: lines drafted, then a person's check */
+.pa-doc { fill:var(--card); }
+.pa-line { stroke:var(--ink-30); stroke-dasharray:1; stroke-dashoffset:0; }
+.pa-check circle { fill:var(--accent); stroke:none; }
+.pa-check path { stroke:var(--card); stroke-width:2.2; }
+.pa-check { transform-box:fill-box; transform-origin:center; }
+/* accountability: one slot on the calendar, filled */
+.pa-cal { fill:var(--card); }
+.pa-cell { fill:var(--tint); stroke:none; }
+.pa-cell-on { fill:var(--gold); transform-box:fill-box; transform-origin:center; }
+.pa-tick { stroke:var(--on-gold); stroke-width:1.8; }
+/* vision: the road so far, the road ahead, and the sun coming up */
+.pa-horizon { stroke:var(--ink-30); }
+.pa-road { stroke:var(--ink); }
+.pa-road-ahead { stroke:var(--ink-30); stroke-dasharray:3 4; }
+.pa-sun { fill:var(--gold); stroke:none; }
+.pa-walker { fill:var(--accent); stroke:none; offset-distance:100%; }
+
+@media (prefers-reduced-motion:no-preference) {
+ .pa-glass { animation:pa-hunt 6s cubic-bezier(.65,0,.35,1) infinite; }
+ .pa-target { animation:pa-found 6s linear infinite; }
+ .pa-bubble { transform-box:fill-box; transform-origin:12% 100%; animation:pa-talk 6s cubic-bezier(.34,1.56,.64,1) infinite; }
+ .pa-runner { animation:pa-run 6s linear infinite; }
+ .pa-node { animation:pa-node 6s ease-out infinite; }
+ .pa-line { animation:pa-draft 5s cubic-bezier(.65,0,.35,1) infinite; }
+ .pa-check { animation:pa-approve 5s cubic-bezier(.34,1.56,.64,1) infinite; }
+ .pa-cell-on { animation:pa-book 5s cubic-bezier(.34,1.56,.64,1) infinite; }
+ .pa-tick { stroke-dasharray:20; animation:pa-tick 5s ease infinite; }
+ .pa-sun { animation:pa-rise 7s cubic-bezier(.22,1,.36,1) infinite; }
+ .pa-road-ahead { animation:pa-march 1.6s linear infinite; }
+ .pa-walker { animation:pa-walk 7s cubic-bezier(.45,0,.55,1) infinite; }
+}
+@keyframes pa-hunt { 0%,6% { transform:translateX(0); opacity:0; } 10% { opacity:1; } 48%,88% { transform:translateX(104px); opacity:1; } 96%,100% { transform:translateX(104px); opacity:0; } }
+@keyframes pa-found { 0%,46% { fill:var(--rule); } 50%,94% { fill:var(--gold); } 100% { fill:var(--rule); } }
+@keyframes pa-talk { 0%,54% { transform:scale(0); opacity:0; } 62%,90% { transform:scale(1); opacity:1; } 98%,100% { transform:scale(.6); opacity:0; } }
+@keyframes pa-run { from { offset-distance:0%; } to { offset-distance:100%; } }
+@keyframes pa-node { 0%,2% { fill:var(--accent); } 18%,100% { fill:var(--card); } }
+@keyframes pa-draft { 0% { stroke-dashoffset:1; opacity:1; } 40%,88% { stroke-dashoffset:0; opacity:1; } 100% { stroke-dashoffset:0; opacity:0; } }
+@keyframes pa-approve { 0%,44% { transform:scale(0); } 54%,88% { transform:scale(1); } 100% { transform:scale(0); } }
+@keyframes pa-book { 0%,30% { transform:scale(.2); fill:var(--tint); } 40%,90% { transform:scale(1); fill:var(--gold); } 100% { transform:scale(1); fill:var(--tint); } }
+@keyframes pa-tick { 0%,44% { stroke-dashoffset:20; } 56%,88% { stroke-dashoffset:0; } 100% { stroke-dashoffset:20; } }
+@keyframes pa-rise { 0% { transform:translateY(22px); } 60%,100% { transform:translateY(0); } }
+@keyframes pa-march { to { stroke-dashoffset:-14; } }
+@keyframes pa-walk { 0% { offset-distance:0%; opacity:0; } 8% { opacity:1; } 85% { offset-distance:100%; opacity:1; } 100% { offset-distance:100%; opacity:0; } }
+@media (max-width:767px) { .pa { width:150px; margin-top:16px; } }
