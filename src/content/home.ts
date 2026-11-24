@@ -6,8 +6,8 @@
 // numbers, no "Pilot", "Pipeline" or "qualified conversations"; "B2B lead generation" in metadata only.
 
 export const meta = {
- title: "BesideYou | B2B Lead Generation for Founder-Led B2B Firms, Pay Per Qualified Call",
- description: "BesideYou builds and runs the system that finds your clients through cold email, for founder-led B2B firms. You keep the system, and you pay only when a qualified call actually happens.",
+ title: "B2B Lead Generation, Pay Per Qualified Call | BesideYou",
+ description: "BesideYou finds your buyers through cold email and books sales calls with them. You keep the system and pay only when a call with the right buyer happens.",
 } as const;
 
 export const problem = {

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
+import { PageBreadcrumb, ServiceData } from "@/components/structured-data";
 import { PageIntro } from "@/components/structure";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { closing, firstEmail, intro, keep, meta, offer, provide, solutions, who } from "@/content/solutions";
@@ -17,6 +18,7 @@ function SectionHead({ eyebrow, title, id }: { eyebrow: string; title: string; i
 
 export default function SolutionsPage() {
  return <>
+  <PageBreadcrumb name="Solutions" path="/solutions" /><ServiceData />
   <ScrollReveal selector=".sl-rv" />
   <PageIntro label={intro.label} title={intro.title} lead={intro.lead} />
 

@@ -203,7 +203,17 @@
 
 /* ---------- Hero illustration: one buyer at a time, found to booked (components/hero-scene.tsx) ---------- */
 /* Only where there's room beside the headline (1180px and up). Gold is a fill only. */
-.hs { display:none; }
+/* Phones and tablets: the card sits under the button, full width up to a comfortable size. */
+@media (max-width:1179px) {
+ .by-hero { display:flex; flex-direction:column; }
+ .hs { order:1; width:100%; max-width:440px; margin-top:44px; }
+ .hs-label { text-align:left; }
+}
+@media (max-width:767px) {
+ .hs { margin-top:36px; }
+ .hs-steps li { font-size:9px; letter-spacing:.04em; }
+ .hs-body > * { padding:12px 14px; }
+}
 @media (min-width:1180px) {
  .by-hero { --hs-w:clamp(360px,29vw,420px); }
  .by-hero-title { max-width:min(830px,calc(100% - var(--hs-w) - 56px)); }

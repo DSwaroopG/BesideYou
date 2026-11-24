@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
+import { PageBreadcrumb } from "@/components/structured-data";
 import { PageIntro } from "@/components/structure";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { OfferFlight } from "@/components/offer-flight";
@@ -17,6 +18,7 @@ const num = (k: number) => String(k + 1).padStart(2, "0");
 
 export default function WhyPage() {
  return <>
+  <PageBreadcrumb name="Why BesideYou" path="/why-besideyou" />
   <ScrollReveal selector=".of-rv" />
   <PageIntro label={intro.label} title={intro.title} lead={intro.lead} />
 

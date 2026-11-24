@@ -5,9 +5,10 @@ import { stages, stagesHead, vignettes } from "@/content/how-it-works";
 
 // Pinned scroll story for /how-it-works. Scroll mechanics follow home-flow.tsx:
 // the section renders static (all stages stacked, every detail drawn) and is upgraded to a
-// pinned stage only on roomy screens with motion allowed. Reveal targets carry data-at, a
+// pinned stage when there's room and motion is allowed: desktops, and phones tall enough to hold one
+// step at a time (phones get a trimmed layout, see how.css). Reveal targets carry data-at, a
 // threshold on their stage's local progress; CSS decides how a pending element looks.
-const PIN_QUERY = "(min-width: 900px) and (min-height: 700px)";
+const PIN_QUERY = "(min-width: 900px) and (min-height: 700px), (max-width: 899px) and (min-height: 680px)";
 const DOT_WINDOW = .07;   // share of the track over which the rail dot travels to the next stop
 const REVEAL_SPAN = .7;   // share of a stage's window used for its vignette reveal
 const LEAD_IN = .12;      // stage 01 starts revealing slightly before the stage pins

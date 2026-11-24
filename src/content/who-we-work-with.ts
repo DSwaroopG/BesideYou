@@ -9,7 +9,7 @@
 
 export const meta = {
  title: "Who We Help: Founder-Led B2B Firms | BesideYou",
- description: "For founder-led teams whose growth still depends on reaching the right buyers, not more of them. B2B lead generation for AI and data teams, software studios, managed IT providers and B2B service firms.",
+ description: "B2B lead generation for founder-led firms: AI and data teams, software studios, managed IT providers and B2B service firms where the founder still sells.",
 } as const;
 
 export const intro = {

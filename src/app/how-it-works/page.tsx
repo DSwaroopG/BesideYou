@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 import { pageMetadata } from "@/lib/metadata";
 import { PageIntro } from "@/components/structure";
 import { Questions } from "@/components/questions";
-import { FaqData } from "@/components/structured-data";
+import { FaqData, PageBreadcrumb } from "@/components/structured-data";
 import { HowStages } from "@/components/how-stages";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { closing, exclusions, faq, intro, meta, qualified, setup, terms } from "@/content/how-it-works";
@@ -20,6 +20,7 @@ function SectionHead({ eyebrow, title, id }: { eyebrow: string; title: string; i
 
 export default function HowItWorksPage() {
  return <>
+  <PageBreadcrumb name="How it works" path="/how-it-works" />
   <FaqData items={faq.items} />
   <ScrollReveal selector=".hw-rv" />
   <PageIntro label={intro.label} title={intro.title} lead={intro.lead} />

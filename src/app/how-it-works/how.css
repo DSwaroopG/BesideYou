@@ -311,3 +311,34 @@
  .hw-stages *,.hw-stages [data-at] { transition:none!important; }
  .hw-rv,.hw-rv *,.hw-rv::before,.hw-rv::after,.hw-rv *::before,.hw-rv *::after,.hw-faq .by-questions details::details-content,.hw-faq .by-questions summary span { transition:none!important; }
 }
+
+/* Phones: the same pinned story, trimmed so one step fits on screen. "From you / From us" waits for
+   the static list (no JS, reduced motion); the step, its line and its little animation stay. */
+@media (max-width:767px) {
+ .hw-stages[data-mode=pinned] .hw-track { height:calc((100svh - var(--header-h)) * 4.4); }
+ .hw-stages[data-mode=pinned] .hw-stage { padding-block:14px 8px; }
+ .hw-stages[data-mode=pinned] .hw-head h2 { font-size:21px; line-height:1.22; }
+ .hw-stages[data-mode=pinned] .hw-rail { height:38px; margin:16px 6px 2px; }
+ .hw-stages[data-mode=pinned] .hw-stop-label { font-size:10px; opacity:0; transition:opacity .3s,color .3s; }
+ .hw-stages[data-mode=pinned] .hw-stop[data-state=active] .hw-stop-label { opacity:1; }
+ .hw-stages[data-mode=pinned] .hw-stop-num { margin-right:5px; }
+ .hw-stages[data-mode=pinned] .hw-chapters { align-items:start; padding:6px 0 0; }
+ .hw-stages[data-mode=pinned] .hw-chapter { row-gap:14px; align-content:start; }
+ .hw-stages[data-mode=pinned] .hw-num { display:none; }
+ .hw-stages[data-mode=pinned] .hw-copy h3 { margin-top:0; font-size:22px; line-height:1.2; }
+ .hw-stages[data-mode=pinned] .hw-body { margin-top:8px; font-size:15px; line-height:1.5; }
+ .hw-stages[data-mode=pinned] .hw-split { display:none; }
+ .hw-stages[data-mode=pinned] .hw-ui-wrap { padding:10px; }
+ .hw-stages[data-mode=pinned] .hw-ui { --ui-gap:9px; padding:14px; font-size:13px; }
+ .hw-stages[data-mode=pinned] .hw-ui-head { padding-bottom:8px; }
+ .hw-stages[data-mode=pinned] .hw-stage-foot { display:none; }
+}
+@media (max-width:767px) and (min-height:800px) {
+ .hw-stages[data-mode=pinned] .hw-split { display:block; margin-top:12px; }
+ .hw-stages[data-mode=pinned] .hw-split > div { grid-template-columns:78px minmax(0,1fr); gap:10px; padding:6px 0; }
+ .hw-stages[data-mode=pinned] .hw-split dd { font-size:14px; }
+}
+
+/* Step hand-over: the old step clears before the new one arrives, so their text never overlaps. */
+.hw-stages[data-mode=pinned] .hw-chapter[data-state=before],.hw-stages[data-mode=pinned] .hw-chapter[data-state=after] { transition:opacity .18s ease,transform .3s cubic-bezier(.22,1,.36,1); }
+.hw-stages[data-mode=pinned] .hw-chapter[data-state=active] { transition:opacity .4s cubic-bezier(.22,1,.36,1) .2s,transform .45s cubic-bezier(.22,1,.36,1) .2s; }

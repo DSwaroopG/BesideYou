@@ -159,3 +159,7 @@
 @keyframes pa-march { to { stroke-dashoffset:-14; } }
 @keyframes pa-walk { 0% { offset-distance:0%; opacity:0; } 8% { opacity:1; } 85% { offset-distance:100%; opacity:1; } 100% { offset-distance:100%; opacity:0; } }
 @media (max-width:767px) { .pa { width:150px; margin-top:16px; } }
+
+/* Caption hand-over: the old line clears before the new one arrives, so two never overlap. */
+.of-flight[data-mode=pinned] .of-beat[data-state=before],.of-flight[data-mode=pinned] .of-beat[data-state=after] { transition:opacity .18s ease,transform .3s cubic-bezier(.22,1,.36,1); }
+.of-flight[data-mode=pinned] .of-beat[data-state=active] { transition:opacity .45s cubic-bezier(.22,1,.36,1) .2s,transform .6s cubic-bezier(.22,1,.36,1) .2s; }

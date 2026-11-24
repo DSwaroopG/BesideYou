@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
+import { PageBreadcrumb } from "@/components/structured-data";
 import { PageIntro } from "@/components/structure";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { WhoExamples } from "@/components/who-examples";
@@ -18,6 +19,7 @@ function SectionHead({ eyebrow, title, id }: { eyebrow: string; title: string; i
 // close this page now live on /why-besideyou.
 export default function WhoWeHelpPage() {
  return <>
+  <PageBreadcrumb name="Who we help" path="/who-we-help" />
   <ScrollReveal selector=".ww-rv" />
   <PageIntro label={intro.label} title={intro.title} lead={intro.lead} />
 

@@ -6,8 +6,8 @@
 // Rules: no prices or commercial terms, no em dashes, never call BesideYou an agency, no made-up numbers.
 
 export const meta = {
- title: "Solutions: Prospecting, Outreach and Booked Sales Calls | BesideYou",
- description: "Everything we do to put qualified sales calls on your calendar: finding buyers, qualifying them, writing to them, following up, booking calls and reporting. B2B lead generation you pay for per qualified call.",
+ title: "Solutions: Find Buyers, Book Sales Calls | BesideYou",
+ description: "Everything we do to put sales calls on your calendar: finding buyers, checking fit, cold email, follow-ups, booking and a monthly report. Pay per call.",
 } as const;
 
 export const intro = {

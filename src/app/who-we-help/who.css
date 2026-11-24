@@ -288,3 +288,8 @@ div.ww-pick { grid-template-columns:minmax(0,1fr); }
 @media (prefers-reduced-motion:reduce) {
  .ww-pick,.ww-pick *,.ww-verdict *,.ww-fitbar i::after { transition:none!important; animation:none!important; }
 }
+
+/* Chapter hand-over: the old person clears before the next arrives, so their text never overlaps. */
+.ww-examples[data-mode=pinned] .ww-chapter[data-state=before],.ww-examples[data-mode=pinned] .ww-chapter[data-state=after] { transition:opacity .18s ease,transform .3s var(--ww-ease); }
+.ww-examples[data-mode=pinned] .ww-chapter[data-state=active] { transition:opacity .42s var(--ww-ease) .2s,transform .5s var(--ww-ease) .2s; }
+@media (prefers-reduced-motion:reduce) { .ww-examples .ww-chapter,.hw-stages .hw-chapter,.of-flight .of-beat { transition:none!important; } }

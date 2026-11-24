@@ -5,7 +5,7 @@
 
 export const meta = {
  title: "Book a Strategy Call | BesideYou",
- description: "Send a short brief and book a strategy call with BesideYou. Bring your hard questions: the call is you doing diligence on us, not us pitching you.",
+ description: "Send a short brief and book a strategy call with BesideYou. Bring your hard questions: it’s you checking us out, not us pitching you.",
 } as const;
 
 export const intro = {

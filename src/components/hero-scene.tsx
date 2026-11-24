@@ -58,7 +58,6 @@ export function HeroScene() {
  useEffect(() => {
   const el = root.current!;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-  const wide = matchMedia("(min-width: 1180px)");
   let raf = 0, last = 0, buyer = 0, visible = false, hovered = false, running = false, ready = false, wait = 0;
   // Start inside the booked hold of the first buyer, so the server frame simply carries on.
   let t = bookAt(SCENE.buyers[0].opener.length) + T.hold - 1400;
@@ -76,7 +75,7 @@ export function HeroScene() {
    raf = requestAnimationFrame(tick);
   };
   const sync = () => {
-   const go = ready && visible && !hovered && wide.matches && !reduced.matches && document.visibilityState === "visible";
+   const go = ready && visible && !hovered && !reduced.matches && document.visibilityState === "visible";
    el.dataset.playing = String(go);
    if (go === running) return;
    running = go;
@@ -101,14 +100,12 @@ export function HeroScene() {
   el.addEventListener("pointerleave", leave);
   document.addEventListener("visibilitychange", sync);
   reduced.addEventListener("change", onReduced);
-  wide.addEventListener("change", sync);
   return () => {
    cancelAnimationFrame(raf); io.disconnect(); gate?.disconnect(); clearTimeout(wait);
    el.removeEventListener("pointerenter", enter);
    el.removeEventListener("pointerleave", leave);
    document.removeEventListener("visibilitychange", sync);
    reduced.removeEventListener("change", onReduced);
-   wide.removeEventListener("change", sync);
   };
  }, []);
 
