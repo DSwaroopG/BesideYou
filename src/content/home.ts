@@ -3,10 +3,10 @@
 // final CTA (components/home-closing.tsx). Lines marked LOCKED must not be reworded; all other
 // lines are drafts pending owner review.
 // Rules: no prices or commercial terms, no em dashes, never call BesideYou an agency, no made-up
-// numbers, no "Pilot", "Pipeline" or "qualified conversations"; "B2B lead generation" in metadata only.
+// numbers, no "Pilot", "Pipeline" or "qualified conversations"; "B2B lead generation" retired as too generic (2026-11-24): we say "booked sales calls".
 
 export const meta = {
- title: "B2B Lead Generation, Pay Per Qualified Call | BesideYou",
+ title: "Pay Per Qualified Call: Booked Sales Calls | BesideYou",
  description: "BesideYou finds your buyers through cold email and books sales calls with them. You keep the system and pay only when a call with the right buyer happens.",
 } as const;
 

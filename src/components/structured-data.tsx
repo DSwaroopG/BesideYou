@@ -15,7 +15,7 @@ export function WebsiteData() {
 }
 // The service, in plain words. No prices: they're agreed on the call.
 export function ServiceData() {
- return <JsonLd data={{ "@context":"https://schema.org", "@type":"Service", name:"Pay Per Qualified Call", serviceType:"B2B lead generation", description:"BesideYou finds your buyers through cold email, follows up, and books sales calls on your calendar. You keep the system and pay only when a call with the right buyer actually happens.", provider:{ "@type":"Organization", name:"BesideYou", url:siteUrl }, audience:{ "@type":"BusinessAudience", audienceType:"Founder-led B2B firms" }, url:`${siteUrl}/solutions` }} />;
+ return <JsonLd data={{ "@context":"https://schema.org", "@type":"Service", name:"Pay Per Qualified Call", serviceType:"Booked sales calls", description:"BesideYou finds your buyers through cold email, follows up, and books sales calls on your calendar. You keep the system and pay only when a call with the right buyer actually happens.", provider:{ "@type":"Organization", name:"BesideYou", url:siteUrl }, audience:{ "@type":"BusinessAudience", audienceType:"Founder-led B2B firms" }, url:`${siteUrl}/solutions` }} />;
 }
 // Home > page, for the main pages.
 export function PageBreadcrumb({ name, path }: { name: string; path: string }) {
