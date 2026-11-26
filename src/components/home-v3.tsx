@@ -67,6 +67,6 @@ export function HomeWhy() {
 export function HomeFaq() {
  return <section className="by-section hm-faq" aria-labelledby="hm-faq-title">
   <FaqData items={faq.items} />
-  <div className="by-grid"><Head eyebrow={faq.eyebrow} title={faq.title} id="hm-faq-title" /><div className="by-span7"><Questions items={faq.items} itemClassName="hm-rv hm-rise" /></div></div>
+  <div className="by-grid"><Head eyebrow={faq.eyebrow} title={faq.title} id="hm-faq-title" /><div className="by-span7"><Questions phoneLimit={5} items={faq.items} itemClassName="hm-rv hm-rise" /></div></div>
  </section>;
 }

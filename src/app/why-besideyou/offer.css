@@ -163,3 +163,19 @@
 /* Caption hand-over: the old line clears before the new one arrives, so two never overlap. */
 .of-flight[data-mode=pinned] .of-beat[data-state=before],.of-flight[data-mode=pinned] .of-beat[data-state=after] { transition:opacity .18s ease,transform .3s cubic-bezier(.22,1,.36,1); }
 .of-flight[data-mode=pinned] .of-beat[data-state=active] { transition:opacity .45s cubic-bezier(.22,1,.36,1) .2s,transform .6s cubic-bezier(.22,1,.36,1) .2s; }
+
+/* Phones: smaller type and smaller drawings (2026-11-26). */
+@media (max-width:767px) {
+ .of-flight[data-mode=pinned] .of-beat-title { font-size:clamp(24px,7vw,30px); }
+ .of-flight[data-mode=pinned] .of-beat-line { font-size:15px; }
+ .of-beat-title { font-size:22px; }
+ .of-beat-line { font-size:15px; }
+ .of-pillar { padding:20px 0 24px; }
+ .of-pillar h3 { font-size:20px; }
+ .of-pillar-body > p { font-size:15px; line-height:1.55; }
+ .pa { width:min(150px,50%); margin-top:14px; }
+ .of-horizon { padding:16px 18px 18px; }
+ .of-horizon h4 { font-size:17px; }
+ .of-close h2 { font-size:25px; }
+ .of-close .of-close-line { font-size:16px; }
+}

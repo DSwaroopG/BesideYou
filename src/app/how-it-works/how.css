@@ -342,3 +342,21 @@
 /* Step hand-over: the old step clears before the new one arrives, so their text never overlaps. */
 .hw-stages[data-mode=pinned] .hw-chapter[data-state=before],.hw-stages[data-mode=pinned] .hw-chapter[data-state=after] { transition:opacity .18s ease,transform .3s cubic-bezier(.22,1,.36,1); }
 .hw-stages[data-mode=pinned] .hw-chapter[data-state=active] { transition:opacity .4s cubic-bezier(.22,1,.36,1) .2s,transform .45s cubic-bezier(.22,1,.36,1) .2s; }
+
+/* Phones: smaller type; the step story shows the step, its line and its picture, nothing more (2026-11-26). */
+@media (max-width:767px) {
+ .hw-copy h3 { font-size:20px; }
+ .hw-body { font-size:15px; line-height:1.55; }
+ .hw-week p:last-child { font-size:16px; }
+ .hw-signal h3 { font-size:16px; }
+ .hw-ledger dd { font-size:15px; }
+ .hw-promise { font-size:24px; }
+ .hw-compare [role=cell],.hw-compare [role=cell].hw-ours { font-size:15px; }
+ .hw-compare-row { gap:8px; padding:14px 0; }
+ .hw-cell-label { font-size:12px; letter-spacing:.06em; }
+ .hw-close h2 { font-size:25px; }
+ .hw-close .hw-close-line { font-size:16px; }
+ .hw-stages[data-mode=pinned] .hw-head h2 { font-size:19px; }
+ .hw-stages[data-mode=pinned] .hw-copy h3 { font-size:19px; }
+ .hw-stages[data-mode=pinned] .hw-split { display:none; }
+}

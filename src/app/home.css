@@ -305,3 +305,24 @@
 .hm-system a:focus-visible .hm-node { transform:scale(1.35); }
 .hm-system a:focus-visible .hm-outcome { transform:translateX(6px); }
 .hm-system a:active .hm-outcome { transform:translateX(6px) scale(.99); }
+
+/* Phones: smaller type, and the six parts sit two to a row (2026-11-26). */
+@media (max-width:767px) {
+ .hm-contrast { margin-top:24px; }
+ .hm-contrast-row { padding:14px 0; gap:4px; }
+ .hm-usual { font-size:14.5px; }
+ .hm-contrast-row:not(.hm-contrast-head) .hm-ours { font-size:16px; line-height:1.4; }
+ .hm-system { grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:16px; margin:24px 0 16px; }
+ .hm-system li::before,.hm-system li:nth-child(n)::before { right:0; }
+ .hm-system a { gap:6px; padding:20px 0 22px; }
+ .hm-num { font-size:12px; letter-spacing:.04em; }
+ .hm-outcome { font-size:15px; line-height:1.4; }
+ .hm-who-foot { margin-top:24px; }
+ .hm-who-foot p { font-size:16px; }
+ .hm-call-who { font-size:20px; }
+ .hm-call-story { font-size:15px; line-height:1.5; }
+ .hm-verdict { font-size:17px; }
+ .hm-summary-count { font-size:16px; }
+ .hm-summary-count strong { font-size:40px; }
+ .hm-summary-line { font-size:15px; }
+}

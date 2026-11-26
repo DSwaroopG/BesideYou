@@ -578,3 +578,39 @@ img { display:block; max-width:100%; }
  .by-action:hover,.by-action:active,.by-menu-button:active { transform:none; }
  .by-action:hover::before { transform:translateX(-110%); }
 }
+
+/* ---------- Phones: smaller type, tighter spacing, fewer extras (2026-11-26) ----------
+   Kept at the end so it wins over the desktop-first rules above. Nothing visible goes below 12px. */
+@media (max-width:767px) {
+ body { font-size:15px; line-height:1.6; }
+ h1 { font-size:30px; line-height:1.1; }
+ h2,.by-h2 { font-size:23px; line-height:1.2; }
+ h3 { font-size:18px; }
+ .by-lead,.by-intro .by-intro-lead { font-size:16.5px; line-height:1.55; }
+ .by-intro { padding-block:40px 48px; row-gap:18px; }
+ .by-section { padding-top:28px; margin-bottom:56px; }
+ .by-section > .by-eyebrow { margin-bottom:16px; }
+ .by-guarantee { padding:22px; margin-bottom:56px; }
+ .by-guarantee p { font-size:21px; }
+ .by-closing,.by-company-list,.by-step-list { margin-bottom:56px; }
+ .by-questions summary { font-size:16px; }
+ .by-questions summary span { font-size:18px; }
+ .by-close-face { width:min(46vw,170px); }
+ .by-close-title { margin-top:14px; font-size:25px; }
+ .by-close-cta { margin-top:18px; }
+ /* Hero: the decorative wave line goes, and the space it needed with it. */
+ .by-hero { padding:40px 0 48px; }
+ .by-hero-sub { margin-top:20px; font-size:18px; }
+ .by-hero-cta { margin-top:28px; }
+ .by-hero-line { display:none; }
+ .by-hero-guarantee { font-size:15px; }
+}
+
+/* Home FAQ on phones: the first five questions, then a button for the rest (components/more-questions.tsx). */
+.by-q-more { display:none; }
+@media (max-width:767px) {
+ .by-questions[data-more=closed] .by-q-extra { display:none; }
+ .by-q-more:not([hidden]) { display:flex; justify-content:space-between; align-items:center; width:100%; min-height:52px; padding:0; background:none; border:0; border-bottom:1px solid var(--rule); font:400 12px/1.5 var(--font-plex),monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); text-align:left; }
+ .by-q-more span { font-family:var(--font-instrument),sans-serif; font-size:18px; letter-spacing:0; }
+ .by-q-more:active { background:var(--tint); }
+}

@@ -293,3 +293,16 @@ div.ww-pick { grid-template-columns:minmax(0,1fr); }
 .ww-examples[data-mode=pinned] .ww-chapter[data-state=before],.ww-examples[data-mode=pinned] .ww-chapter[data-state=after] { transition:opacity .18s ease,transform .3s var(--ww-ease); }
 .ww-examples[data-mode=pinned] .ww-chapter[data-state=active] { transition:opacity .42s var(--ww-ease) .2s,transform .5s var(--ww-ease) .2s; }
 @media (prefers-reduced-motion:reduce) { .ww-examples .ww-chapter,.hw-stages .hw-chapter,.of-flight .of-beat { transition:none!important; } }
+
+/* Phones: smaller type (2026-11-26). */
+@media (max-width:767px) {
+ .ww-name { font-size:19px; }
+ .ww-line:first-child { font-size:16px; }
+ .ww-examples[data-mode=pinned] .ww-line { font-size:15px; }
+ .ww-pick { padding:13px 14px 13px 12px; }
+ .ww-pick-title { font-size:15px; }
+ .ww-verdict-title { font-size:17px; }
+ .ww-verdict-line { font-size:14px; }
+ .ww-close h2 { font-size:25px; }
+ .ww-close .ww-close-line { font-size:16px; }
+}
